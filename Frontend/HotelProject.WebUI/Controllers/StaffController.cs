@@ -4,7 +4,7 @@ namespace HotelProject.WebUI.Controllers
 {
     public class StaffController : Controller
     {
-        public IActionResult StafIndex()
+        public IActionResult StaffIndex()
         {
             return View();
         }
