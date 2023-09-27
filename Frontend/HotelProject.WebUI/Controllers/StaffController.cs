@@ -13,14 +13,16 @@ namespace HotelProject.WebUI.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
+
+
         public async Task<IActionResult> StaffIndex()
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("http://localhost:5240/api/Staff");
-            if (responseMessage.IsSuccessStatusCode)
+            var client = _httpClientFactory.CreateClient();                                          // Consume için istemci oluşturuldu.
+            var responseMessage = await client.GetAsync("http://localhost:5240/api/Staff");          // Belirtilen adrese istekte bulunuldu.
+            if (responseMessage.IsSuccessStatusCode)                                                 // Adresten başarılı durum kodu dönerse ,
             {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<StaffViewModel>>(jsonData);
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();                    // Gelen veriyi değişkene atadık. (JsonData)
+                var values = JsonConvert.DeserializeObject<List<StaffViewModel>>(jsonData);          // Deserialize ile tabloda görülecek formata getirdik.
                 return View(values);
             }
             return View();
