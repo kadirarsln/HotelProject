@@ -41,7 +41,7 @@ namespace HotelProject.WebUI.Controllers
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(model);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("http://localhost:5240/api/Staff" , stringContent);
+            var responseMessage = await client.PostAsync("http://localhost:5240/api/Staff", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("StaffIndex");
@@ -69,7 +69,21 @@ namespace HotelProject.WebUI.Controllers
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<UpdateStaffViewModel>(jsonData);
-                return View(values);    
+                return View(values);
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateStaff(UpdateStaffViewModel model)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(model);
+            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await client.PutAsync($"http://localhost:5240/api/Staff/" , stringContent);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("StaffIndex");  
             }
             return View();
         }
