@@ -21,8 +21,25 @@ namespace HotelProject.WebUI.Controllers
         }
 
         [HttpPost]
-        public IActionResult RegisterIndex(CreateNewUserDto createNewUserDto)
+        public async Task<IActionResult> RegisterIndex(CreateNewUserDto createNewUserDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            var appUser = new AppUser()
+            {
+                Name = createNewUserDto.Name,
+                Surname = createNewUserDto.Surname,
+                Email = createNewUserDto.Mail,
+                UserName = createNewUserDto.Username,
+            };
+            var result = await _userManager.CreateAsync(appUser, createNewUserDto.Password);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("LoginIndex", "Login");
+            }
+
             return View();
         }
     }
