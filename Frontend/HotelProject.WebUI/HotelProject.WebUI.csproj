@@ -26,4 +26,8 @@
     <ProjectReference Include="..\..\ApiConsume\HotelProject.DtoLayer\HotelProject.DtoLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+
 </Project>
