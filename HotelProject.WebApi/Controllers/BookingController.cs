@@ -14,7 +14,7 @@ namespace HotelProject.WebApi.Controllers
         {
             _bookingService = bookingService;
         }
-        //adanademir
+        
         [HttpGet]
         public IActionResult BookingList()
         {
