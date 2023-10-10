@@ -35,12 +35,12 @@ namespace HotelProject.BusinessLayer.Concrete
 
         public void TInsert(Booking insert)
         {
-            return _bookingDal.Insert(insert);
+            _bookingDal.Insert(insert);
         }
 
         public void TUpdate(Booking update)
         {
-            return _bookingDal.Update(update);
+            _bookingDal.Update(update);
         }
     }
 }
