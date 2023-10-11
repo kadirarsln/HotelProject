@@ -13,7 +13,7 @@ namespace WebApiJwt
             // Add services to the container.
 
 
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>                //JWT Kullanýmý için gerekli yapý.
             {
                 opt.RequireHttpsMetadata = false;
                 opt.TokenValidationParameters = new TokenValidationParameters()
@@ -21,8 +21,8 @@ namespace WebApiJwt
                     ValidIssuer = "http://localhost",
                     ValidAudience = "http://localhost",
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("aspnetcoreapiapi")),
-                    ValidateIssuerSigningKey = true
-
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true
                 };
             });
 
