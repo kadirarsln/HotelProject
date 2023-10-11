@@ -1,7 +1,9 @@
 ﻿using HotelProject.WebUI.Dtos.BookingDto;
+using HotelProject.WebUI.Dtos.ServiceDto;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http;
+using System.Text;
 
 namespace HotelProject.WebUI.Controllers
 {
@@ -23,6 +25,18 @@ namespace HotelProject.WebUI.Controllers
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();                    // Gelen veriyi değişkene atadık. (JsonData)
                 var values = JsonConvert.DeserializeObject<List<ResultBookingDto>>(jsonData);          // Deserialize ile tabloda görülecek formata getirdik.
                 return View(values);
+            }
+            return View();
+        }
+        public async Task<IActionResult> ApprovedReservation(ApprovedReservationDto approvedReservationDto)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(approvedReservationDto);
+            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await client.PutAsync("http://localhost:5240/api/Booking/bbbb", stringContent);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("AdminBookingIndex");
             }
             return View();
         }
