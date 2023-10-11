@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RapidApiConsume.Models;
-using System.Net.Http.Headers;
+
 namespace RapidApiConsume.Controllers
 {
     public class ImdbController : Controller
