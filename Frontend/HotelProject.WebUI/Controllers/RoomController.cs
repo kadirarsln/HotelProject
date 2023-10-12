@@ -4,6 +4,12 @@ namespace HotelProject.WebUI.Controllers
 {
     public class RoomController : Controller
     {
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public RoomController(IHttpClientFactory httpClientFactory)
+        {
+            _httpClientFactory = httpClientFactory;
+        }
         public IActionResult RoomIndex()
         {
             return View();
