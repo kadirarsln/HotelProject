@@ -10,6 +10,9 @@ namespace HotelProject.WebUI.Dtos.RegisterDto
         [Required(ErrorMessage = "Soyad alanı gereklidir!")]
         public string Surname { get; set; }
 
+        [Required(ErrorMessage = "Şehir alanı gereklidir!")]
+        public string City { get; set; }
+
         [Required(ErrorMessage = "Kullanıcı Adı alanı gereklidir!")]
         public string Username { get; set; }
 
