@@ -23,7 +23,7 @@ namespace HotelProject.WebUI.Controllers
             if (responseMessage.IsSuccessStatusCode)                                                 // Adresten başarılı durum kodu dönerse ,
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();                    // Gelen veriyi değişkene atadık. (JsonData)
-                var values = JsonConvert.DeserializeObject<List<ResulRoomDto>>(jsonData);          // Deserialize ile tabloda görülecek formata getirdik.
+                var values = JsonConvert.DeserializeObject<List<StaffViewModel>>(jsonData);          // Deserialize ile tabloda görülecek formata getirdik.
                 return View(values);
             }
             return View();
