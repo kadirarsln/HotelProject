@@ -1,8 +1,11 @@
-﻿@model List<InboxContactDto>
+﻿@model List<ResultSendBoxDto>
 @{
-    ViewData["Title"] = "InboxIndex";
+    ViewData["Title"] = "SendBoxIndex";
     Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
 }
+
+
+
 
 <div class="email-left-box">
     <a href="/AdminContact/AddSendMessage" class="btn btn-primary btn-block">Yeni Mesaj Oluştur</a>
@@ -17,7 +20,7 @@
     <div role="toolbar" class="toolbar">
         <div class="btn-group">
             <button aria-expanded="false" data-toggle="dropdown" class="btn btn-dark dropdown-toggle" type="button">
-                Gelen Mesajlar <span class="caret m-l-5"></span>
+                Gönderilen Mesajlar <span class="caret m-l-5"></span>
             </button>
         </div>
     </div>
@@ -33,8 +36,8 @@
                         </div><span class="star-toggle ti-star"></span>
                     </div>
                     <div class="col-mail col-mail-2">
-                        <div class="subject">@item.Message</div>
-                        <div class="date">11:49 am</div>
+                        <div class="subject"><b><span>Konu: </span>@item.Title</b>@item.Content</div>
+                        <div class="date">@item.Date</div>
                     </div>
                 </a>
             </div>

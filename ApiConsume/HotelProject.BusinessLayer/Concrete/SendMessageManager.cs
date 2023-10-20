@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HotelProject.BusinessLayer.Concrete
 {
-    public class SendMessageMenager : ISendMessageService
+    public class SendMessageManager : ISendMessageService
     {
         private readonly ISendMessageDal _sendMessageDal;
 
-        public SendMessageMenager(ISendMessageDal sendMessageDal)
+        public SendMessageManager(ISendMessageDal sendMessageDal)
         {
             _sendMessageDal = sendMessageDal;
         }

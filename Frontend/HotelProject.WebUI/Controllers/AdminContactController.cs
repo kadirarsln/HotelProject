@@ -29,6 +29,20 @@ namespace HotelProject.WebUI.Controllers
             }
             return View();
         }
+
+        public async Task<IActionResult> SendBoxIndex()
+        {
+            var client = _httpClientFactory.CreateClient();                                          // Consume için istemci oluşturuldu.
+            var responseMessage = await client.GetAsync("http://localhost:5240/api/SendMessage");          // Belirtilen adrese istekte bulunuldu.
+            if (responseMessage.IsSuccessStatusCode)                                                 // Adresten başarılı durum kodu dönerse ,
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();                    // Gelen veriyi değişkene atadık. (JsonData)
+                var values = JsonConvert.DeserializeObject<List<ResultSendBoxDto>>(jsonData);          // Deserialize ile tabloda görülecek formata getirdik.
+                return View(values);
+            }
+            return View();
+        }
+
         [HttpGet]
         public IActionResult AddSendMessage()
         {
@@ -38,6 +52,9 @@ namespace HotelProject.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddSendMessage(CreateSendMessage createSendMessage)
         {
+            createSendMessage.SenderMail = "admin@gmail.com";
+            createSendMessage.SenderName = "admin";
+            createSendMessage.Date = DateTime.Parse(DateTime.Now.ToShortDateString());
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createSendMessage);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
