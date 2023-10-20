@@ -4,9 +4,6 @@
     Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
 }
 
-
-
-
 <div class="email-left-box">
     <a href="/AdminContact/AddSendMessage" class="btn btn-primary btn-block">Yeni Mesaj Oluştur</a>
 
@@ -28,7 +25,7 @@
         @foreach (var item in Model)
         {
             <div class="message">
-                <a href="email-read.html">
+                <a href="/AdminContact/MessageDetailsBySendbox/@item.SendMessageID">
                     <div class="col-mail col-mail-1">
                         <div class="email-checkbox">
                             <input type="checkbox" id="chk2">
@@ -36,8 +33,10 @@
                         </div><span class="star-toggle ti-star"></span>
                     </div>
                     <div class="col-mail col-mail-2">
-                        <div class="subject"><b><span>Konu: </span>@item.Title</b>@item.Content</div>
-                        <div class="date">@item.Date</div>
+                        <div class="subject">
+                            <b>Konu:</b> @item.Title  <b>Alıcı:</b> @item.ReciverName
+                        </div>
+                        <div class="date">@(((DateTime)item.Date).ToString("dd-MM-yyyy"))</div>
                     </div>
                 </a>
             </div>
