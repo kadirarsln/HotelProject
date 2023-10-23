@@ -35,6 +35,8 @@ namespace HotelProject.WebUI.Controllers
             smtpClient.Authenticate("kadiraduriz72@gmail.com", "dyyufbttgzarkgsu");
             smtpClient.Send(mimeMessage);
             smtpClient.Disconnect(true);
+
+            // Gönderilen Mailin Veri Tabanına Kaydedilmesi.
             return View();
         }
     }
