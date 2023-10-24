@@ -25,13 +25,20 @@ namespace HotelProject.WebUI.Controllers
             var client2 = _httpClientFactory.CreateClient();                                          // Consume için istemci oluşturuldu.
             var responseMessage2 = await client2.GetAsync("http://localhost:5240/api/Contact/GetContactCount");
 
+            var client3 = _httpClientFactory.CreateClient();                                          // Consume için istemci oluşturuldu.
+            var responseMessage3 = await client3.GetAsync("http://localhost:5240/api/SendMessage/GetSendMessageCount");
+
             if (responseMessage.IsSuccessStatusCode)                                                 // Adresten başarılı durum kodu dönerse ,
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();                    // Gelen veriyi değişkene atadık. (JsonData)
                 var values = JsonConvert.DeserializeObject<List<InboxContactDto>>(jsonData);          // Deserialize ile tabloda görülecek formata getirdik.
 
                 var jsonData2 = await responseMessage2.Content.ReadAsStringAsync();
-                ViewBag.contactCount=jsonData2;
+                ViewBag.contactCount = jsonData2;
+
+                var jsonData3 = await responseMessage3.Content.ReadAsStringAsync();
+                ViewBag.sendMessageCount = jsonData3;
+
                 return View(values);
             }
             return View();
