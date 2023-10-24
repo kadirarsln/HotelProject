@@ -1,11 +1,13 @@
 ﻿using HotelProject.WebUI.Dtos.ServiceDto;
 using HotelProject.WebUI.Dtos.SubscribeDto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
 
 namespace HotelProject.WebUI.Controllers
 {
+    [AllowAnonymous]
     public class DefaultController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -32,7 +34,7 @@ namespace HotelProject.WebUI.Controllers
             var responseMessage = await client.PostAsync("http://localhost:5240/api/Subscribe", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index","Default");
+                return RedirectToAction("Index", "Default");
             }
             return View();
         }
