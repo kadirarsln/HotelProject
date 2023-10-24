@@ -21,10 +21,17 @@ namespace HotelProject.WebUI.Controllers
         {
             var client = _httpClientFactory.CreateClient();                                          // Consume için istemci oluşturuldu.
             var responseMessage = await client.GetAsync("http://localhost:5240/api/Contact");          // Belirtilen adrese istekte bulunuldu.
+
+            var client2 = _httpClientFactory.CreateClient();                                          // Consume için istemci oluşturuldu.
+            var responseMessage2 = await client2.GetAsync("http://localhost:5240/api/Contact/GetContactCount");
+
             if (responseMessage.IsSuccessStatusCode)                                                 // Adresten başarılı durum kodu dönerse ,
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();                    // Gelen veriyi değişkene atadık. (JsonData)
                 var values = JsonConvert.DeserializeObject<List<InboxContactDto>>(jsonData);          // Deserialize ile tabloda görülecek formata getirdik.
+
+                var jsonData2 = await responseMessage2.Content.ReadAsStringAsync();
+                ViewBag.contactCount=jsonData2;
                 return View(values);
             }
             return View();
@@ -68,6 +75,7 @@ namespace HotelProject.WebUI.Controllers
 
         public PartialViewResult SidebarAdminContactPartial()
         {
+
             return PartialView();
         }
         public PartialViewResult SidebarAdminContactCategoryPartial()
@@ -95,6 +103,19 @@ namespace HotelProject.WebUI.Controllers
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<InboxContactDto>(jsonData);
+                return View(values);
+            }
+            return View();
+        }
+
+        public async Task<IActionResult> GetContacCount()
+        {
+            var client = _httpClientFactory.CreateClient();                                          // Consume için istemci oluşturuldu.
+            var responseMessage = await client.GetAsync("http://localhost:5240/api/Contact/GetContactCount");          // Belirtilen adrese istekte bulunuldu.
+            if (responseMessage.IsSuccessStatusCode)                                                 // Adresten başarılı durum kodu dönerse ,
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();                    // Gelen veriyi değişkene atadık. (JsonData)
+                var values = JsonConvert.DeserializeObject<List<InboxContactDto>>(jsonData);          // Deserialize ile tabloda görülecek formata getirdik.
                 return View(values);
             }
             return View();
