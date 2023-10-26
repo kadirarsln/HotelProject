@@ -1,10 +1,13 @@
 ﻿using HotelProject.BusinessLayer.Abstract;
 using HotelProject.EntityLayer.Concrete;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelProject.WebApi.Controllers
 {
-    public class WorkLocationController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class WorkLocationController : ControllerBase
     {
         private readonly IWorkLocationService _workLocationService;
 
