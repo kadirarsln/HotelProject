@@ -12,14 +12,14 @@ namespace HotelProject.DataAccessLayer.Migrations
                 name: "WorkLocationDepartment",
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
-                nullable: true,
+                nullable: false,
                 defaultValue: "");
 
             migrationBuilder.AddColumn<int>(
                 name: "WorkLocationID",
                 table: "AspNetUsers",
                 type: "int",
-                nullable: true,
+                nullable: false,
                 defaultValue: 0);
 
             migrationBuilder.CreateTable(
